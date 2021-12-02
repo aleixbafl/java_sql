@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class projecte_1 {
     static Connection connectarBD = null;
+    private static Object sentencia;
     public static void main (String[] args) throws SQLException {
         boolean sortir=false;
         connectarBD();
@@ -19,7 +20,7 @@ public class projecte_1 {
         
             //12/11/21
         do{
-           System.out.println("^^^^MENU GESTOR PRODUCTES^^^^");
+           System.out.println("****MENU GESTOR PRODUCTES****");
            System.out.println("1.Manteniment de productes A/B/M/C");
            System.out.println("2.Actualitzar stocks");
            System.out.println("3.Generar comanda als proveïdors");
@@ -56,26 +57,45 @@ public class projecte_1 {
       } while (!sortir);
         desconnexioBD();
     }
-          
+    
+    
     static void altaProductes (){
-            System.out.println("Alta productes");
-        }
+        System.out.println("Alta productes");
+    }
     static void actualitzarStocks(){
-           System.out.println("Actualitzar Stock");
+        System.out.println("Actualitzar Stock");
 
     }
     static void generarComanda(){
-           System.out.println("Generar comanda");
+        System.out.println("Generar comanda");
+        /*
+        RsultSet rs = sentencia.executeQuery();
+        String proveidorAnt="";
+        while (rs.next()){
+            idprod=rs.getint("idprod");
+            nomprod=rs.getString("nomprod");
+            stokprod=rs.getint("stokprod");
+            proveidor=rs.getString("proveidor");
+            categoria=rs.getString("categoria");
+            
+            if (!proveidorAnt.equals(proveidor)){
+                proveidorAnt = proveidor;
+                System.out.println("canvi proveidor: " + proveidor);
+            }
+        }
+        */
+        
+               
     }
     static void consultarComandes(){
-           System.out.println("Consultar comanda");
+        System.out.println("Consultar comanda");
     }
     
     static void gestioProductes () throws SQLException {
         Scanner teclat = new Scanner (System.in);
         boolean enrere=false;
         do{
-           System.out.println("^^^^MENU GESTOR PRODUCTES^^^^");
+           System.out.println("****MENU GESTOR PRODUCTES****");
            System.out.println("1.Llista Productes");
            System.out.println("2.Alta de Productes");
            System.out.println("3.modificar Productes");
