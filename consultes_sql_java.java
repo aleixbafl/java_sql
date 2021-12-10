@@ -2,6 +2,10 @@ package Projecte;
 
 import static Projecte.projecte_1.connectarBD;
 import com.mysql.jdbc.Connection;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +17,7 @@ import java.util.Scanner;
 public class projecte_1 {
     static Connection connectarBD = null;
     private static Object sentencia;
-    public static void main (String[] args) throws SQLException {
+    public static void main (String[] args) throws SQLException, IOException {
         boolean sortir=false;
         connectarBD();
         Scanner teclat = new Scanner (System.in);
@@ -23,8 +27,8 @@ public class projecte_1 {
            System.out.println("****MENU GESTOR PRODUCTES****");
            System.out.println("1.Manteniment de productes A/B/M/C");
            System.out.println("2.Actualitzar stocks");
-           System.out.println("3.Generar comanda als proveïdors");
-           System.out.println("4.Consultar comandes del dia");
+           System.out.println("3.Generar comandes");
+           System.out.println("4.Analisis comandes proveïdors");
            System.out.println("5.Sortir");
            System.out.println("\nTria una de les opcions");
            
@@ -66,7 +70,7 @@ public class projecte_1 {
         System.out.println("Actualitzar Stock");
 
     }
-    static void generarComanda(){
+    static void generarComanda() throws IOException, SQLException{
         System.out.println("Generar comanda");
         /*
         RsultSet rs = sentencia.executeQuery();
@@ -85,10 +89,29 @@ public class projecte_1 {
         }
         */
         
-               
+        String consola ="SELECT * FROM productes WHERE";
+        PreparedStatement ps = connectarBD.prepareStatement(consulta);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            FileWriter fw = new FileWriter("fichero.txt",true);
+            BufferedWriter bf = new BufferedWriter(fw);
+            PrintWriter escritor = new PrintWriter(bf);
+            escritor.println("");
+            escritor.println("");
+            escritor.println("");
+            escritor.println("");
+            
+            do{
+                pw.println("    " + nomprod + "\t" + categoria + "\t" + (MAXSTOCK - rs.getInt("estock")))
+            }while (rs.next());
+        }
+        
+        
+        
     }
     static void consultarComandes(){
         System.out.println("Consultar comanda");
+        
     }
     
     static void gestioProductes () throws SQLException {
@@ -217,7 +240,7 @@ public class projecte_1 {
         String model = teclat.nextLine();
         String estoc = teclat.nextLine();
         String marca = teclat.nextLine();
-PreparedStatement sentencia = null;
+        PreparedStatement sentencia = null;
  
     try {
       sentencia = connectarBD.prepareStatement(sentenciaSql);
