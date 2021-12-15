@@ -124,7 +124,7 @@ public class projecte_1 {
            System.out.println("3.modificar Productes");
            System.out.println("4.Esborrar Productes");
            System.out.println("5.Enrere");
-           System.out.println("\nTria una de les opcions");
+           System.out.println("\nTria una de les opcions:");
 
             int opcio=teclat.nextInt();
             teclat.nextLine();
@@ -260,21 +260,19 @@ public class projecte_1 {
             }
         }
     }
-    static void connectarBD(){
+    static void connectarBD() {
 
-            String servidor="jdbc:mysql://192.168.1.93:3307/";
-            String bbdd="electroimp";
-            String user="root";
-            String password="Alastor666Radio";
-            
-            try{
+        String servidor = "jdbc:mysql://192.168.1.93:3307/";
+        String bbdd = "electroimp";
+        String user = "root";
+        String password = "Alastor666Radio";
 
-                connectarBD = (Connection) DriverManager.getConnection(servidor + bbdd, user, password);
-            }
-            catch (SQLException ex) {
-                ex.printStackTrace();
+        try {
 
-            }
-    }
-            
+            connectarBD = (Connection) DriverManager.getConnection(servidor + bbdd, user, password);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+
+        }
+    }     
 }
